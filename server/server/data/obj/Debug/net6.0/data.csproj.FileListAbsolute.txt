@@ -1,0 +1,14 @@
+C:\workspace\Desafio_Fullstack\server\server\data\bin\Debug\net6.0\data.deps.json
+C:\workspace\Desafio_Fullstack\server\server\data\bin\Debug\net6.0\data.runtimeconfig.json
+C:\workspace\Desafio_Fullstack\server\server\data\bin\Debug\net6.0\data.dll
+C:\workspace\Desafio_Fullstack\server\server\data\bin\Debug\net6.0\data.pdb
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\data.csproj.AssemblyReference.cache
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\data.GeneratedMSBuildEditorConfig.editorconfig
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\data.AssemblyInfoInputs.cache
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\data.AssemblyInfo.cs
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\data.csproj.CoreCompileInputs.cache
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\data.dll
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\refint\data.dll
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\data.pdb
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\data.genruntimeconfig.cache
+C:\workspace\Desafio_Fullstack\server\server\data\obj\Debug\net6.0\ref\data.dll
