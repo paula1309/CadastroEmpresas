@@ -1,36 +1,79 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using data.Interface;
+using Microsoft.AspNetCore.Mvc;
 
 namespace server.Controllers
 {
     public class FornecedorController : Controller
     {
+        private readonly IFornecedorRepo _fornecedorRepo;
+
+        public FornecedorController(IFornecedorRepo fornecedorRepo)
+        {
+            _fornecedorRepo = fornecedorRepo;
+        }
 
         [HttpGet]
         [Route("/listarTodosFornecedores")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult ListAllSuppliers()
         {
-            return Ok();
+            try
+            {
+                return Ok(ListAllSuppliers());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         [Route("/CriarNovoFornecedor")]
-        public IActionResult CreateNewSupplier()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CreateNewSupplier(data.DTO.Fornecedor fornecedor)
         {
-            return Ok();
+            try
+            {
+                return Ok(CreateNewSupplier(fornecedor));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]
         [Route("/AtualizarFornecedor")]
-        public IActionResult UpdateSupplier()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UpdateSupplier(data.DTO.Fornecedor fornecedor)
         {
-            return Ok();
+            try
+            {
+                return Ok(UpdateSupplier(fornecedor));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete]
         [Route("/ApagarFornecedor")]
-        public IActionResult DeleteSupplier()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult DeleteSupplier(Guid id)
         {
-            return Ok();
+            try
+            {
+                return Ok(DeleteSupplier(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

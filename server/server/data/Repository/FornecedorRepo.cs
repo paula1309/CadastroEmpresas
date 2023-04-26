@@ -32,13 +32,17 @@ namespace data.Repository
 
         public Guid CreateSupplier(DTO.Fornecedor fornecedor)
         {
-            Entity.Fornecedor fornecedorEntity = new Entity.Fornecedor()
+            Entity.Fornecedor fornecedorEntity = new Entity.Fornecedor();
+            fornecedorEntity.CnpjCpf = fornecedor.CnpjCpf;
+            fornecedorEntity.Nome= fornecedor.Nome;
+            fornecedorEntity.Cep= fornecedor.Cep;
+            fornecedorEntity.IdEmpresas = (ICollection<Entity.Empresa>)fornecedor.IdEmpresas;
+
+            if (fornecedor.CnpjCpf.Length == 11)
             {
-                CnpjCpf = fornecedor.CnpjCpf,
-                Nome = fornecedor.Nome,
-                Cep = fornecedor.Cep,
-                IdEmpresas = (ICollection<Entity.Empresa>)fornecedor.IdEmpresas
-            };
+                fornecedorEntity.Rg = fornecedor.Rg;
+                fornecedorEntity.DataNascimento = fornecedor.DataNascimento;
+            }
 
             _context.ChangeTracker.Clear();
             _context.Add(fornecedorEntity);

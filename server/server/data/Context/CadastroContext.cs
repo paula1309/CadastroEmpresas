@@ -46,7 +46,7 @@ public partial class CadastroContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("Nome_Fantasia");
 
-            entity.HasMany(d => d.IdFornecedors).WithMany(p => p.IdEmpresas)
+            entity.HasMany(d => d.IdFornecedor).WithMany(p => p.IdEmpresas)
                 .UsingEntity<Dictionary<string, object>>(
                     "EmpresasXfornecedore",
                     r => r.HasOne<Fornecedor>().WithMany()
