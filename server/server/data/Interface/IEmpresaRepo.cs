@@ -9,10 +9,10 @@ namespace data.Interface
     public interface IEmpresaRepo
     {
         public List<DTO.Empresa> ListAllCompanies();
-
+        public dynamic SearchSuppliersByCompany(Guid id);
         public Guid CreateCompany(DTO.Empresa empresa);
         public Guid UpdateCompany(DTO.Empresa empresa);
-        public void DeleteCompany(Guid id);
+        public Guid DeleteCompany(Guid id);
 
     }
 }

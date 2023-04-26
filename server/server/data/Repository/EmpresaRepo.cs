@@ -21,13 +21,19 @@ namespace data.Repository
             return (from empresas in _context.Empresas
                     select new DTO.Empresa()
                     {
-                        IdEmpresa    = empresas.IdEmpresa,
-                        Cnpj         = empresas.Cnpj,
+                        IdEmpresa = empresas.IdEmpresa,
+                        Cnpj = empresas.Cnpj,
                         NomeFantasia = empresas.NomeFantasia,
-                        Cep          = empresas.Cep,
-                        IdFornecedor = (ICollection<DTO.Fornecedor>) empresas.IdFornecedor
+                        Cep = empresas.Cep,
 
                     }).ToList();
+        }
+
+        public dynamic SearchSuppliersByCompany(Guid id)
+        {
+            return (from empresas in _context.Empresas
+                    select empresas.IdFornecedor);
+
         }
 
         public Guid CreateCompany(DTO.Empresa empresa)
@@ -37,7 +43,6 @@ namespace data.Repository
                 Cnpj         = empresa.Cnpj,
                 NomeFantasia = empresa.NomeFantasia,
                 Cep          = empresa.Cep,
-                IdFornecedor = (ICollection<Entity.Fornecedor>) empresa.IdFornecedor
             };
 
             _context.ChangeTracker.Clear();
@@ -68,11 +73,6 @@ namespace data.Repository
                 empresaEntity.Cep = empresa.Cep;
             }
 
-            if (empresa.IdFornecedor != null)
-            {
-                empresaEntity.IdFornecedor = (ICollection<Entity.Fornecedor>)empresa.IdFornecedor;
-            }
-
             _context.ChangeTracker.Clear();
             _context.Update(empresaEntity);
             _context.SaveChanges();
@@ -80,7 +80,7 @@ namespace data.Repository
             return empresaEntity.IdEmpresa;
         }
 
-        public void DeleteCompany(Guid id) 
+        public Guid DeleteCompany(Guid id) 
         {
             Entity.Empresa empresaEntity = _context.Empresas
                 .FirstOrDefault(w => w.IdEmpresa == id) ?? new Entity.Empresa();
@@ -88,6 +88,8 @@ namespace data.Repository
             _context.ChangeTracker.Clear();
             _context.Remove(empresaEntity);
             _context.SaveChanges();
+
+            return empresaEntity.IdEmpresa;
         }
     }
 }

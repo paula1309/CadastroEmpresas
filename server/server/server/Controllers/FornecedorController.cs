@@ -20,7 +20,23 @@ namespace server.Controllers
         {
             try
             {
-                return Ok(ListAllSuppliers());
+                return Ok(_fornecedorRepo.ListAllSuppliers());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("/listarClientesPeloFornecedor")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult ListClientsBySupplier(Guid id)
+        {
+            try
+            {
+                return Ok(_fornecedorRepo.SearchClientsBySupplier(id));
             }
             catch (Exception ex)
             {
@@ -36,7 +52,7 @@ namespace server.Controllers
         {
             try
             {
-                return Ok(CreateNewSupplier(fornecedor));
+                return Ok(_fornecedorRepo.CreateSupplier(fornecedor));
             }
             catch (Exception ex)
             {
@@ -52,7 +68,7 @@ namespace server.Controllers
         {
             try
             {
-                return Ok(UpdateSupplier(fornecedor));
+                return Ok(_fornecedorRepo.UpdateSupplier(fornecedor));
             }
             catch (Exception ex)
             {
@@ -68,7 +84,7 @@ namespace server.Controllers
         {
             try
             {
-                return Ok(DeleteSupplier(id));
+                return Ok(_fornecedorRepo.DeleteSupplier(id));
             }
             catch (Exception ex)
             {

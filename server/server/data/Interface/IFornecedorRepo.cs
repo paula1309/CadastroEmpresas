@@ -9,8 +9,9 @@ namespace data.Interface
     public interface IFornecedorRepo
     {
         public List<DTO.Fornecedor> ListAllSuppliers();
+        public dynamic SearchClientsBySupplier(Guid id);
         public Guid CreateSupplier(DTO.Fornecedor fornecedor);
         public Guid UpdateSupplier(DTO.Fornecedor fornecedor);
-        public void DeleteSupplier(Guid id);
+        public Guid DeleteSupplier(Guid id);
     }
 }

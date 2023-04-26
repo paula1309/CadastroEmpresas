@@ -21,8 +21,24 @@ namespace server.Controllers
         {
             try
             {
-                return Ok(ListAllCompanies());
+                return Ok(_empresaRepo.ListAllCompanies());
             }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("/listarFornecedoresPorEmpresa")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult ListSuppliersByCompany(Guid id)
+        {
+            try
+            {
+                return Ok(_empresaRepo.SearchSuppliersByCompany(id));
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -36,7 +52,7 @@ namespace server.Controllers
         {
             try
             {
-                return Ok(CreateNewCompany(empresa));
+                return Ok(_empresaRepo.CreateCompany(empresa));
             }catch(Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -51,7 +67,7 @@ namespace server.Controllers
         {
             try
             {
-                return Ok(UpdateCompany(empresa));
+                return Ok(_empresaRepo.UpdateCompany(empresa));
             }
             catch (Exception ex)
             {
@@ -67,7 +83,7 @@ namespace server.Controllers
         {
             try
             {
-                return Ok(DeleteCompany(id));
+                return Ok(_empresaRepo.DeleteCompany(id));
             }
             catch (Exception ex)
             {

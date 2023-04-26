@@ -25,9 +25,13 @@ namespace data.Repository
                         CnpjCpf = fornecedores.CnpjCpf,
                         Nome = fornecedores.Nome,
                         Cep = fornecedores.Cep,
-                        IdEmpresas = (ICollection<DTO.Empresa>)fornecedores.IdEmpresas
-
                     }).ToList();
+        }
+
+        public dynamic SearchClientsBySupplier(Guid id)
+        {
+            return (from fornecedores in _context.Fornecedores
+                    select fornecedores.IdEmpresas);
         }
 
         public Guid CreateSupplier(DTO.Fornecedor fornecedor)
@@ -84,7 +88,7 @@ namespace data.Repository
             return fornecedorEntity.IdFornecedor;
         }
 
-        public void DeleteSupplier(Guid id)
+        public Guid DeleteSupplier(Guid id)
         {
             Entity.Fornecedor fornecedorEntity = _context.Fornecedores
                 .FirstOrDefault(w => w.IdFornecedor == id) ?? new Entity.Fornecedor();
@@ -92,6 +96,8 @@ namespace data.Repository
             _context.ChangeTracker.Clear();
             _context.Remove(fornecedorEntity);
             _context.SaveChanges();
+
+            return fornecedorEntity.IdFornecedor;
         }
     }
 }
