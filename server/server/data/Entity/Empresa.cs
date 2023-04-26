@@ -13,5 +13,5 @@ public partial class Empresa
 
     public string Cep { get; set; } = null!;
 
-    public virtual ICollection<Fornecedor> IdFornecedors { get; set; } = new List<Fornecedor>();
+    public virtual ICollection<Fornecedor> IdFornecedor { get; set; } = new List<Fornecedor>();
 }
