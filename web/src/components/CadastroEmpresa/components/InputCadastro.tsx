@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Empresa } from "..";
 
 interface InputCadastroProps{
@@ -11,14 +11,6 @@ interface InputCadastroProps{
 }
 
 export default function InputCadastro({title, type, id, placeholder, inputEnabled, setData}: InputCadastroProps){
-  var xhr = new XMLHttpRequest();
-    xhr.open ("GET", "http://cep.la/06700227", true);
-    xhr.setRequestHeader ("Accept", "application/json");
-    xhr.onreadystatechange = function(){
-      if((xhr.readyState === 0 || xhr.readyState === 4) && xhr.status === 200)
-        console.log(xhr.responseText);
-    };
-    xhr.send (null);
 
   return(
     <label htmlFor={id} className="text-lg flex flex-col items-start">

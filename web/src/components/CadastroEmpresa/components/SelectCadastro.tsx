@@ -1,23 +1,35 @@
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Fornecedores } from "..";
 
 interface SelectCadastroProps{
-  fornecedores: Fornecedores[],
+  fornecedores: Fornecedores[] | undefined,
+  setValueSelect: Dispatch<SetStateAction<string | undefined>>,
 }
 
-export default function SelectCadastro({fornecedores}: SelectCadastroProps){
+export default function SelectCadastro({fornecedores, setValueSelect}: SelectCadastroProps){
+  const [selectedItem, setSelectedItem] = useState<string>();
+
+  useEffect(() => {
+    setValueSelect(selectedItem)
+  }, [selectedItem])
+
   return(
     <label className="text-white text-lg flex flex-col items-start col-span-5">
       Fornecedores
       <select
-      placeholder="Fornecedores"
-      className="border border-solid border-sky-800 h-9 rounded-l w-full text-sky-800"
-    >
-    {fornecedores.map((item) => (
-      <option key={item.id + item.nome} value={item.nome}>
-        {item.nome}
-      </option>
-    ))}
-    </select>
+        className="border border-solid border-sky-800 h-9 rounded-l w-full text-sky-800"
+        value={selectedItem}
+        onChange={e => setSelectedItem(e.target.value)}
+      >
+      {fornecedores?.map((item) => (
+        <option
+          key={item.id + item.nome}
+          value={item.nome}
+        >
+          {item.nome}
+        </option>
+      ))}
+      </select>
     </label>
   )
 }

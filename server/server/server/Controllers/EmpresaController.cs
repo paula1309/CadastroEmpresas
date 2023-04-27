@@ -49,7 +49,7 @@ namespace server.Controllers
         [Route("/CriarNovaEmpresa")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult CreateNewCompany(data.DTO.Empresa empresa)
+        public IActionResult CreateNewCompany([FromBody]data.DTO.Empresa empresa)
         {
             try
             {

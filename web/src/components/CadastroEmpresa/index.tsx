@@ -1,9 +1,8 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import InputCadastro from "./components/InputCadastro";
 import ListCadastro from "./components/ListCadastro";
 import SelectCadastro from "./components/SelectCadastro";
-//import { api } from "../../lib/axios";
-//import {v4 as uuidv4} from "uuid";
+import { api } from "../../lib/axios";
 
 export interface Empresa{
   id: string,
@@ -21,44 +20,72 @@ export interface Fornecedores{
   dataNascimento?: string
 }
 
+type Cep = {
+  cep: string,
+  uf: string,
+  cidade: string,
+  bairro: string,
+  logradouro: string,
+}
+
 export default function CadastroEmpresa(){
+  const [fornecedores, setFornecedores] = useState<Fornecedores[]>();
+  // const [cep, setCep] = useState<Cep>();
   const [cadastroEmpresa, setCadastroEmpresa] = useState<Empresa>({} as Empresa);
+  const [lsFornecedor, setLsFornecedor] = useState<string[]>([""]);
+  const [valueSelect, setValueSelect] = useState<string>();
 
-  // const handleChange = () => {
-
-  // }
+  function handleLsFornecedores() {
+    // return setLsFornecedor([...lsFornecedor, valueSelect]);
+    console.log(valueSelect);
     
+  }
+
+  async function handleCepClick() {
+    const response = await fetch('http://cep.la/65081264', {
+        headers: {"Accept":"application/json"}
+    });
+    
+    const movies = await response.json();
+    console.log(movies);
+    
+  }
+
   async function handleFormSubmit(event: FormEvent){
     event.preventDefault();
-
-    console.log(event.target);
-    console.log(cadastroEmpresa);
     
-
-    // await api.post("/CriarNovaEmpresa", {
-    //   idEmpresa: uuidv4(),
-    //   nomeFantasia: "Geração Coca-Cola",
-    //   cnpj: "33391711000193",
-    //   cep: "16200053"
-    // });
-  }  
-
-  const fornecedorData = [
-    {
-      id: "1",
-      nome: "Paula teste 1",
-      cnpjCpf: "12345678901234",
-      cep: "1234567-890"
-    },
-    {
-      id: "1",
-      nome: "Paula teste 2",
-      cnpjCpf: "12345678901",
-      cep: "1234567-890",
-      rg: "123456789",
-      dataNascimento: "1999-02-02"
+    try{
+      const response = await api.post("/CriarNovaEmpresa", {
+        NomeFantasia: "Geração Coca-Cola",
+        Cnpj: "33391711000193",
+        Cep: "16200053"
+      });
+      console.log({response});
+      
+    }catch(ex){
+      console.log(ex);
     }
-  ]
+    
+  }
+
+  // Listar Fornecedores
+  async function getSuppliers(){
+    try{
+      const response = await api.get("/listarTodosFornecedores");
+
+      setFornecedores(response.data);
+
+      console.log(fornecedores);
+      
+    }catch(ex){
+      console.log(ex);
+      
+    }
+  }
+
+  useEffect(()=>{
+    getSuppliers();
+  },[]);
 
   return(
     <div className="bg-sky-500 box-border p-4 w-1/2 rounded-md items-center">
@@ -84,14 +111,21 @@ export default function CadastroEmpresa(){
           inputEnabled={false}
           setData={setCadastroEmpresa}
         />
-        <InputCadastro
-          title="Cep"
-          type="text"
-          id="cep"
-          placeholder="Ex.: 12345-678"
-          inputEnabled={false}
-          setData={setCadastroEmpresa}
-        />
+        <div className="flex">
+          <InputCadastro
+            title="Cep"
+            type="text"
+            id="cep"
+            placeholder="Ex.: 12345-678"
+            inputEnabled={false}
+            setData={setCadastroEmpresa}
+          />
+          <button
+          type="button"
+            className="bg-sky-800 self-end rounded-r h-[36px] text-white w-[80px]"
+            onClick={()=>handleCepClick()}
+          >Adicionar</button>
+        </div>
         <div className="grid grid-cols-2 gap-3">
           <InputCadastro
             title="Logradouro"
@@ -130,11 +164,18 @@ export default function CadastroEmpresa(){
         </div>
 
         <div className="grid grid-cols-6">
-          <SelectCadastro fornecedores={fornecedorData} />
-          <button className="bg-sky-800 self-end rounded-r h-[36px] text-white w-full">+</button>
+          <SelectCadastro
+            fornecedores={fornecedores}
+            setValueSelect={setValueSelect}
+          />
+          <button
+            type="button"
+            className="bg-sky-800 self-end rounded-r h-[36px] text-white w-full"
+            onClick={() => handleLsFornecedores()}
+          >+</button>
         </div>
 
-        <ListCadastro fornecedor={fornecedorData} />
+        <ListCadastro fornecedor={lsFornecedor} />
         
         <button
           className="bg-sky-800 self-end rounded h-1/2 mt-4 text-white w-1/4"

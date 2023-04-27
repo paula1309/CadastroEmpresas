@@ -16,7 +16,11 @@ builder.Services.AddScoped<
     data.Interface.IFornecedorRepo,
     data.Repository.FornecedorRepo>();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
+
+app.UseCors(cors=>cors.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
