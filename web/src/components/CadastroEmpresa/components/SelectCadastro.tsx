@@ -13,7 +13,7 @@ export default function SelectCadastro({fornecedores}: SelectCadastroProps){
       className="border border-solid border-sky-800 h-9 rounded-l w-full text-sky-800"
     >
     {fornecedores.map((item) => (
-      <option key={item.id} value={item.nome}>
+      <option key={item.id + item.nome} value={item.nome}>
         {item.nome}
       </option>
     ))}
