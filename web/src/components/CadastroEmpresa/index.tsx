@@ -43,9 +43,10 @@ export default function CadastroEmpresa(){
   const [valueSelect, setValueSelect] = useState<string>();
 
   function handleLsFornecedores() {
-    //return setLsFornecedor([...lsFornecedor, valueSelect]);
-    console.log(valueSelect);
-    
+    const newFornecedor = [...lsFornecedor, valueSelect]
+
+    // setLsFornecedor(newFornecedor)
+       
   }
 
   async function handleCepClick() {

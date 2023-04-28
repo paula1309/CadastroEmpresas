@@ -52,8 +52,20 @@ export default function ListaEmpresa(){
     }
   }
 
-  const cepNumero = "65081264";
+  async function handleSupplierList(){
+    try{
+      const response = await api.get("/listarFornecedoresPorEmpresa");
 
+      console.log(response);
+      
+      
+    }catch(ex){
+      console.log(ex);
+      
+    }
+  }
+
+  const cepNumero = "65081264";
   async function getCompanyAddress() {
     const response = await fetch('http://cep.la/' + cepNumero, {
         headers: {"Accept":"application/json"}
@@ -104,6 +116,7 @@ export default function ListaEmpresa(){
                 <td>
                 <button
                     className="bg-sky-200 m-4 p-2 rounded font-bold text-sky-800"
+                    onClick={handleSupplierList}
                   > Ver Lista </button>
                 </td>
                 <td>
