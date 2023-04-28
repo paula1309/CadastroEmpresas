@@ -1,10 +1,13 @@
+import Button from "./components/Button";
+
 export default function Header(){
+
+
   return(
     <div className="bg-sky-500 w-full">
       <nav>
-      <button className="bg-sky-200 m-4 p-2 rounded font-bold">
-        Cadastro de Empresas
-      </button>
+        <Button title="Lista de Empresas" route="/" />
+        <Button title="Cadastro de Empresa" route="/cadastroEmpresa" />
     </nav>
     </div>
     

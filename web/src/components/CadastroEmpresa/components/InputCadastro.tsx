@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction} from "react";
 import { Empresa } from "..";
 
 interface InputCadastroProps{
@@ -6,11 +6,14 @@ interface InputCadastroProps{
   type: string,
   id: string,
   placeholder: string,
-  inputEnabled: boolean
+  inputEnabled: boolean,
+  value?: string,
   setData: Dispatch<SetStateAction<Empresa>>
 }
 
-export default function InputCadastro({title, type, id, placeholder, inputEnabled, setData}: InputCadastroProps){
+export default function InputCadastro({title, type, id, placeholder, inputEnabled, value, setData}: InputCadastroProps){
+
+
 
   return(
     <label htmlFor={id} className="text-lg flex flex-col items-start">
@@ -20,6 +23,7 @@ export default function InputCadastro({title, type, id, placeholder, inputEnable
         className="border border-solid border-sky-800 p-2 h-9 rounded w-full"
         type={type}
         id={id}
+        value={value}
         placeholder={placeholder}
       />
     </label>

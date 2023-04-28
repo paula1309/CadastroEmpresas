@@ -40,7 +40,6 @@ namespace data.Repository
             fornecedorEntity.CnpjCpf = fornecedor.CnpjCpf;
             fornecedorEntity.Nome= fornecedor.Nome;
             fornecedorEntity.Cep= fornecedor.Cep;
-            fornecedorEntity.IdEmpresas = (ICollection<Entity.Empresa>)fornecedor.IdEmpresas;
 
             if (fornecedor.CnpjCpf.Length == 11)
             {
