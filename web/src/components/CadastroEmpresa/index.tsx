@@ -6,7 +6,6 @@ import { api } from "../../lib/axios";
 import Header from "../Header";
 
 export interface Empresa{
-  id: string,
   nome: string,
   cnpj: string,
   cep: string,
@@ -30,7 +29,7 @@ type Cep = {
 }
 
 export default function CadastroEmpresa(){
-  const [fornecedores, setFornecedores] = useState<Fornecedores[]>();
+  const [fornecedores, setFornecedores] = useState<Fornecedores[]>([]);
   const [cep, setCep] = useState<Cep>({
     cep: "",
     uf: "",
@@ -40,12 +39,14 @@ export default function CadastroEmpresa(){
   });
   const [cadastroEmpresa, setCadastroEmpresa] = useState<Empresa>({} as Empresa);
   const [lsFornecedor, setLsFornecedor] = useState<string[]>([""]);
-  const [valueSelect, setValueSelect] = useState<string>();
+  const [valueSelect, setValueSelect] = useState<string>("");
 
+  // Listar Fornecedores escolhidos
   function handleLsFornecedores() {
     const newFornecedor = [...lsFornecedor, valueSelect]
+    const filterFornecedor = newFornecedor.filter((item, index)=> newFornecedor.indexOf(item) === index);
 
-    // setLsFornecedor(newFornecedor)
+    setLsFornecedor(filterFornecedor);
        
   }
 
@@ -77,7 +78,7 @@ export default function CadastroEmpresa(){
     
   }
 
-  // Listar Fornecedores
+  // Listar Fornecedores no Select
   async function getSuppliers(){
     try{
       const response = await api.get("/listarTodosFornecedores");

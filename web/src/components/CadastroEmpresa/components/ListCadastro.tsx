@@ -15,10 +15,13 @@ export default function ListCadastro({fornecedor}: ListCadastroProps){
           <input type="text" />
         </label>
       </div>
-      {fornecedor.map(item => {
+      {fornecedor.length === 1 ? 
+        <p className="flex flex-col py-2 px-6 items-start">Não há fornecedores para essa empresa, adicione!!</p>
+        : 
+        fornecedor.map((item,index) => {
         return(
-          <span key={item} className="flex flex-col py-2 px-6 items-start">
-            {item ? item : <p>Não há fornecedores para essa empresa, adicione!!</p>}
+          <span key={index} className="flex flex-col py-2 px-6 items-start">
+            {item}
           </span>
         )
       })}
