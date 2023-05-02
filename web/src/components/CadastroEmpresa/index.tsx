@@ -64,6 +64,7 @@ export default function CadastroEmpresa(){
     
   }
 
+  // Criar empresa nova
   async function handleFormSubmit(event: FormEvent){
     event.preventDefault();
     
