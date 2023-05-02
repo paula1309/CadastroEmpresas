@@ -30,6 +30,9 @@ type Cep = {
 
 export default function CadastroEmpresa(){
   const [fornecedores, setFornecedores] = useState<Fornecedores[]>([]);
+  const [nameValue, setName] = useState<string>("");
+  const [cnpjValue, setCnpj] = useState<string>("");
+  const [cepValue, setCepValue] = useState<string>("");
   const [cep, setCep] = useState<Cep>({
     cep: "",
     uf: "",
@@ -50,8 +53,9 @@ export default function CadastroEmpresa(){
        
   }
 
+  // Pegar o endereço do cep digitado
   async function handleCepClick() {
-    const response = await fetch('http://cep.la/65081264', {
+    const response = await fetch('http://cep.la/' + cepValue, {
         headers: {"Accept":"application/json"}
     });
     
@@ -66,15 +70,17 @@ export default function CadastroEmpresa(){
     
     try{
       const response = await api.post("/CriarNovaEmpresa", {
-        NomeFantasia: "Geração Coca-Cola",
-        Cnpj: "33391711000193",
-        Cep: "16200053"
+        NomeFantasia: nameValue,
+        Cnpj: cnpjValue,
+        Cep: cepValue
       });
       console.log({response});
       
     }catch(ex){
       console.log(ex);
     }
+
+    // Falta a lista de fornecedores
     
   }
 
@@ -91,8 +97,19 @@ export default function CadastroEmpresa(){
     }
   }
 
+  // Pegar os valores dos inputs
+  function HandleInputChange(id: string, value: string){
+    switch(id){
+      case 'name': setName(value); break;
+      case 'cnpj': setCnpj(value); break;
+      case 'cep': setCepValue(value); break;
+      default: console.log("erro interno");
+    }
+  }
+
   useEffect(()=>{
-    getSuppliers();
+    getSuppliers(); 
+    
   },[]);
 
   return(
@@ -112,6 +129,7 @@ export default function CadastroEmpresa(){
             placeholder="Coloque o nome da empresa"
             inputEnabled={false}
             setData={setCadastroEmpresa}
+            handleInputChange={HandleInputChange}
           />
           <InputCadastro
             title="CNPJ"
@@ -120,6 +138,7 @@ export default function CadastroEmpresa(){
             placeholder="Coloque seu CNPJ"
             inputEnabled={false}
             setData={setCadastroEmpresa}
+            handleInputChange={HandleInputChange}
           />
           <div className="flex">
             <InputCadastro
@@ -129,6 +148,7 @@ export default function CadastroEmpresa(){
               placeholder="Ex.: 12345-678"
               inputEnabled={false}
               setData={setCadastroEmpresa}
+              handleInputChange={HandleInputChange}
             />
             <button
             type="button"

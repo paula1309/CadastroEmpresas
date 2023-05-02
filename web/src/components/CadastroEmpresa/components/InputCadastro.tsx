@@ -1,4 +1,4 @@
-import { Dispatch, FormEvent, SetStateAction, useState} from "react";
+import { Dispatch, FormEvent, SetStateAction} from "react";
 import { Empresa } from "..";
 
 interface InputCadastroProps{
@@ -8,28 +8,19 @@ interface InputCadastroProps{
   placeholder: string,
   inputEnabled: boolean,
   value?: string,
-  setData: Dispatch<SetStateAction<Empresa>>
+  setData: Dispatch<SetStateAction<Empresa>>,
+  handleInputChange?: any; // (id: string, value: string) => void
 }
 
-export default function InputCadastro({title, type, id, placeholder, inputEnabled, value, setData}: InputCadastroProps){
-  const [nameValue, setName] = useState<string>("");
-  const [cnpjValue, setCnpj] = useState<string>("");
-  const [cepValue, setCep] = useState<string>("");
+export default function InputCadastro({title, type, id, placeholder, inputEnabled, value, setData, handleInputChange}: InputCadastroProps){
+  // const [nameValue, setName] = useState<string>("");
+  // const [cnpjValue, setCnpj] = useState<string>("");
+  // const [cepValue, setCep] = useState<string>("");
 
   function HandleInputChange(e: FormEvent){
     const inputValue = (e.target as HTMLInputElement).value;
 
-    if(id === "name") {
-      setName(inputValue);
-    }
-
-    if(id === "cnpj") {
-      setCnpj(inputValue);
-    }
-
-    if(id === "cep") {
-      setCep(inputValue); 
-    }  
+    handleInputChange(id, inputValue);
   }
   
 
