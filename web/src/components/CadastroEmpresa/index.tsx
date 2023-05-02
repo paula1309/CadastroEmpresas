@@ -40,7 +40,6 @@ export default function CadastroEmpresa(){
     bairro: "",
     logradouro: ""
   });
-  const [cadastroEmpresa, setCadastroEmpresa] = useState<Empresa>({} as Empresa);
   const [lsFornecedor, setLsFornecedor] = useState<string[]>([""]);
   const [valueSelect, setValueSelect] = useState<string>("");
 
@@ -128,7 +127,6 @@ export default function CadastroEmpresa(){
             id="name"
             placeholder="Coloque o nome da empresa"
             inputEnabled={false}
-            setData={setCadastroEmpresa}
             handleInputChange={HandleInputChange}
           />
           <InputCadastro
@@ -137,7 +135,6 @@ export default function CadastroEmpresa(){
             id="cnpj"
             placeholder="Coloque seu CNPJ"
             inputEnabled={false}
-            setData={setCadastroEmpresa}
             handleInputChange={HandleInputChange}
           />
           <div className="flex">
@@ -147,7 +144,6 @@ export default function CadastroEmpresa(){
               id="cep"
               placeholder="Ex.: 12345-678"
               inputEnabled={false}
-              setData={setCadastroEmpresa}
               handleInputChange={HandleInputChange}
             />
             <button
@@ -163,7 +159,6 @@ export default function CadastroEmpresa(){
               id="logradouro"
               placeholder="Ex.: Rua Lima"
               inputEnabled={true}
-              setData={setCadastroEmpresa}
               value={cep.logradouro}
             />
             <InputCadastro
@@ -172,7 +167,6 @@ export default function CadastroEmpresa(){
               id="bairro"
               placeholder="Ex.: Jardim Miranda"
               inputEnabled={true}
-              setData={setCadastroEmpresa}
               value={cep.bairro}
             />
           </div>
@@ -183,7 +177,6 @@ export default function CadastroEmpresa(){
               id="cidade"
               placeholder="Ex.: Itaguacetuba"
               inputEnabled={true}
-              setData={setCadastroEmpresa}
               value={cep.cidade}
             />
             <InputCadastro
@@ -192,7 +185,6 @@ export default function CadastroEmpresa(){
               id="estado"
               placeholder="Ex.: Rio de Janeiro"
               inputEnabled={true}
-              setData={setCadastroEmpresa}
               value={cep.uf}
             />
           </div>

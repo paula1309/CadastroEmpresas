@@ -8,11 +8,10 @@ interface InputCadastroProps{
   placeholder: string,
   inputEnabled: boolean,
   value?: string,
-  setData: Dispatch<SetStateAction<Empresa>>,
   handleInputChange?: any; // (id: string, value: string) => void
 }
 
-export default function InputCadastro({title, type, id, placeholder, inputEnabled, value, setData, handleInputChange}: InputCadastroProps){
+export default function InputCadastro({title, type, id, placeholder, inputEnabled, value, handleInputChange}: InputCadastroProps){
   // const [nameValue, setName] = useState<string>("");
   // const [cnpjValue, setCnpj] = useState<string>("");
   // const [cepValue, setCep] = useState<string>("");
